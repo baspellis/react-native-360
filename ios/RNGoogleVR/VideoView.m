@@ -121,10 +121,10 @@ RCT_ENUM_CONVERTER(GVRWidgetDisplayMode, (@{
 
 -(void)setPlay:(BOOL)play
 {
-  if(play && _isPaused) {
+  if (play && _isPaused) {
     [_videoView play];
     _isPaused = NO;
-  } else if (!play &&  && !_isPaused){
+  } else if (!play && !_isPaused){
     [_videoView pause];
     _isPaused = YES;
   }
@@ -143,8 +143,10 @@ RCT_ENUM_CONVERTER(GVRWidgetDisplayMode, (@{
 
 - (void)widgetView:(GVRWidgetView *)widgetView didLoadContent:(id)content {
   RCTLogInfo(@"Finished loading video");
-  [_videoView play];
-  _isPaused = NO;
+  if (this.play) {
+    [_videoView play];
+    _isPaused = NO;
+  }
 }
 
 - (void)widgetView:(GVRWidgetView *)widgetView
