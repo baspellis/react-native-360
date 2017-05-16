@@ -21,8 +21,8 @@
     "cardboard"
   ],
   "peerDependencies": {
-    "react": "^15.4.1",
-    "react-native": "^0.39.0"
+    "react": "^16.0.0",
+    "react-native": "^0.44.0"
   },
   "author": "tiero",
   "license": "MIT"
