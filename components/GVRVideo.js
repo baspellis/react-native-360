@@ -26,6 +26,7 @@ VideoView.propTypes = {
   enableInfoButton: PropTypes.bool,
   enableTouchTracking: PropTypes.bool,
   hidesTransitionView: PropTypes.bool,
+  play: PropTypes.bool,
 }
 
 // requireNativeComponent automatically resolves this to "VideoManager"

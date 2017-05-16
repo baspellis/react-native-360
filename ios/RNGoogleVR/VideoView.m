@@ -36,7 +36,7 @@ RCT_ENUM_CONVERTER(GVRWidgetDisplayMode, (@{
   _videoView.delegate = self;
   _isPaused = YES;
   [self addSubview:_videoView];
-  
+
   return self;
 }
 
@@ -58,20 +58,20 @@ RCT_ENUM_CONVERTER(GVRWidgetDisplayMode, (@{
   NSString *uri = [video objectForKey:@"uri"];
   NSURL *url = [NSURL URLWithString:uri];
   NSString *strType = [video objectForKey:@"type"];
-  
+
   GVRVideoType videoType = kGVRVideoTypeMono;
   if ([strType isEqualToString:@"stereo"]) {
     videoType = kGVRVideoTypeStereoOverUnder;
   }
-  
+
   //play from remote url
   if ( [[uri lowercaseString] hasPrefix:@"https://"] ) {
-    
+
     [_videoView loadFromUrl:url ofType:videoType];
-    
+
   }else{ // play from local
     //Local asset: Can be in the bundle or the uri can be an absolute path of a stored video in the application
-    
+
     //Check whether the file loaded from the Bundle,
     NSString *localPath = [[NSBundle mainBundle] pathForResource:uri ofType:@"mp4"];
     if (localPath) {
@@ -83,7 +83,7 @@ RCT_ENUM_CONVERTER(GVRWidgetDisplayMode, (@{
     //                   ofType:videoType];
     [_videoView loadFromUrl:url ofType:videoType];
   }
-  
+
   [_videoView pause];
 }
 
@@ -119,6 +119,16 @@ RCT_ENUM_CONVERTER(GVRWidgetDisplayMode, (@{
   _videoView.enableCardboardButton = enableCardboardButton;
 }
 
+-(void)setPlay:(BOOL)play
+{
+  if(play && _isPaused) {
+    [_videoView play];
+    _isPaused = NO;
+  } else if (!play &&  && !_isPaused){
+    [_videoView pause];
+    _isPaused = YES;
+  }
+}
 
 #pragma mark - GVRVideoViewDelegate
 
